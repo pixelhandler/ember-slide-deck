@@ -13,14 +13,25 @@
 
   <script type="text/x-handlebars" id="slides">
     {{#each model}}
-      {{#linkTo 'slide' this}}
-        <img {{bindAttr src="filename"}}>
-      {{/linkTo}}
+      {{#if filename}}
+        {{#linkTo 'slide' this}}
+          <img {{bindAttr src="filename"}}>
+        {{/linkTo}}
+      {{/if}}
+      {{#if iframeUrl}}
+        <a {{bindAttr href="iframeUrl"}}>{{iframeUrl}}</a>
+        <br>
+      {{/if}}
     {{/each}}
   </script>
 
   <script type="text/x-handlebars" id="slide">
-    <img {{bindAttr src="model.filename"}}>
+    {{#if model.filename}}
+      <img {{bindAttr src="model.filename"}}>
+    {{/if}}
+    {{#if model.iframeUrl}}
+      <iframe {{bindAttr src="model.iframeUrl"}} seamless="seamless"></iframe>
+    {{/if}}
     <input type="text" value="">
   </script>
 

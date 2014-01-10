@@ -9,5 +9,6 @@ App.Slide.FIXTURES = [
   { id: '6', filename: 'http://fpoimg.com/800x600?text=Slide-B1', milliseconds: 300 },
   { id: '7', filename: 'http://fpoimg.com/800x600?text=Slide-B2', milliseconds: 300 },
   { id: '8', filename: 'http://fpoimg.com/800x600?text=Slide-B3' },
-  { id: '9', filename: 'http://fpoimg.com/800x600?text=The End'}
+  { id: '9', filename: 'http://fpoimg.com/800x600?text=The End'},
+  { id: '10', iframeUrl: 'http://dev.w3.org/html5/markup/iframe.html#iframe'}
 ];

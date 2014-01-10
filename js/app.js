@@ -9,14 +9,12 @@ var App = Ember.Application.create({
   }
 });
 
-// Model
-//App.Store = DS.Store.extend({
-  //revision: 12,
-  //adapter: 'DS.FixtureAdapter'
-//});
+// Adapter
 App.ApplicationAdapter = DS.FixtureAdapter.extend();
 
+// Model
 App.Slide = DS.Model.extend({
+  iframeUrl: DS.attr('string'),
   filename: DS.attr('string'),
   milliseconds: DS.attr('number')
 });
@@ -111,16 +109,18 @@ App.SlidesController = Ember.ArrayController.extend({
 });
 
 App.SlideController = Ember.Controller.extend({
-  // left = 37, up = 38, right = 39, down = 40
-  updateKey: function (code) {
-    if (code === 37) {
-      this.get('target').send('previous');
-    } else if (code === 39) {
-      this.get('target').send('next');
-    } else if (code === 38) {
-      this.get('target').send('first');
-    } else if (code === 40) {
-      this.get('target').send('last');
+  actions: {
+    // left = 37, up = 38, right = 39, down = 40
+    updateKey: function (code) {
+      if (code === 37) {
+        this.get('target').send('previous');
+      } else if (code === 39) {
+        this.get('target').send('next');
+      } else if (code === 38) {
+        this.get('target').send('first');
+      } else if (code === 40) {
+        this.get('target').send('last');
+      }
     }
   }
 });

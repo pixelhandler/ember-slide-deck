@@ -137,7 +137,7 @@ App.SlideView = Ember.View.extend({
   },
   didInsertElement: function() {
     $('head title').text([
-        'Sanely Edit an HTML Doc in a Browser with Ember.StateManager',
+        'Ember Slide Deck',
         this.get('context.model.filename')
     ].join(' | '));
     return this.$('input').focus();

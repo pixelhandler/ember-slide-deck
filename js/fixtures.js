@@ -1,3 +1,4 @@
+/*global App*/
 App.Slide.FIXTURES = [
   { id: '0', filename: 'http://fpoimg.com/800x600?text=Title'},
   { id: '1', filename: 'http://fpoimg.com/800x600?text=Section-A', milliseconds: 1000 },

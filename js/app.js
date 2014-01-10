@@ -1,5 +1,7 @@
+/*global $, Ember*/
+
 // Application
-App = Ember.Application.create({
+var App = Ember.Application.create({
   ready: function(){
     App.stateMachine = App.StateMachine.create({
       //enableLogging: true
@@ -8,10 +10,11 @@ App = Ember.Application.create({
 });
 
 // Model
-App.Store = DS.Store.extend({
-  revision: 12,
-  adapter: 'DS.FixtureAdapter'
-});
+//App.Store = DS.Store.extend({
+  //revision: 12,
+  //adapter: 'DS.FixtureAdapter'
+//});
+App.ApplicationAdapter = DS.FixtureAdapter.extend();
 
 App.Slide = DS.Model.extend({
   filename: DS.attr('string'),
@@ -80,15 +83,15 @@ App.IndexRoute = Ember.Route.extend({
 
 App.SlidesRoute = Ember.Route.extend({
   model: function() {
-    return App.Slide.find();
+    return this.store.find('slide');//App.Slide.find();
   }
 });
 
 App.SlideRoute = Ember.Route.extend({
   model: function(params) {
-    return App.Slide.find(params.slide_id);
+    return this.store.find('slide', params.slide_id);//App.Slide.find(params.slide_id);
   },
-  events: {
+  actions: {
     previous: function () {
       var id = '' + (+this.get('currentModel.id') - 1);
       window.document.location = '#/slides/' + id;
@@ -136,7 +139,7 @@ App.SlideView = Ember.View.extend({
     $('head title').text([
         'Sanely Edit an HTML Doc in a Browser with Ember.StateManager',
         this.get('context.model.filename')
-    ].join(' | '))
+    ].join(' | '));
     return this.$('input').focus();
-  },
+  }
 });

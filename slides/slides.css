@@ -1,0 +1,122 @@
+html, body {
+  /* see http://www.google.com/fonts#UsePlace:use/Collection:Montserrat */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+}
+
+section, article {
+  padding: 1em 2em 0;
+  margin-bottom: 1em;
+  border-radius: 3px;
+  -webkit-box-direction: normal;
+}
+
+a, a:link, a:hover, a:visited, a:active {
+  color: rgba(149, 119, 72, 1);
+  text-decoration: none;
+}
+
+.centered {
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.centered {
+  height: 24em;
+  min-height: 90%;
+}
+
+.centered.hero {
+  height: 18em;
+  min-height: 75%;
+}
+
+.centered.minion {
+  height: 6em;
+  min-height: 15%;
+}
+
+.item {
+  height: 24em;
+  min-height: 70%;
+  background-color: rgba(40, 58, 76, 1); /*darkblue*/
+}
+
+.centered > .item {
+  height: 12em;
+  min-height: 50%;
+  max-width: 70%;
+}
+
+.centered::after, .item::after {
+  content: "";
+  display: block;
+  margin-top: .8em;
+  height: 1px;
+}
+
+.footnote {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+}
+
+/* Kuler
+https://kuler.adobe.com/create/color-wheel/?base=0&rule=Monochromatic&selected=2&name=My%20Kuler%20Theme&mode=rgb&rgbvalues=0.26113275309150524,0.38097923861263683,0.5,0.4178124049464084,0.609566781780219,0.8,0.4796548786067561,0.5316733055114795,0.5833333333333334,0.6578124049464084,0.7291519618443147,0.8,0.1566796518549032,0.22858754316758217,0.3000000000000001&swatchOrder=0,1,2,3,4
+*/
+.darkblue {
+  color: rgba(40, 58, 76, 1);
+}
+.lightblue {
+  color: rgba(107, 155, 204, 1);
+}
+.mediumblue {
+  color: rgba(67, 97, 127, 1);
+}
+.lightgrey {
+  color: rgba(168, 186, 204, 1);
+}
+.mediumgrey {
+  color: rgba(122, 136, 149, 1);
+}
+.golden {
+  color: rgba(149, 119, 72, 1);
+}
+
+body#slide{
+  /*mediumgrey*/
+  background-color: rgba(122, 136, 149, 1);
+}
+
+#slide.title {
+  text-align: center;
+}
+
+#slide h1 {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 2.25rem;
+}
+
+#slide h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+#slide .content h2 {
+  margin: 2em 0 .5em;
+  text-transform: uppercase;
+  color: rgba(107, 155, 204, 1);
+}
+
+#slide p, #slide li {
+  margin: 1em 0;
+  line-height: 2.75rem;
+  font-size: 1.75rem;
+}
+
+#slide p span, #slide li span {
+  color: rgba(149, 119, 72, 1);
+}

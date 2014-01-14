@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Introduction to Ember Data: REST Adapter - Relationships</title>
+  <link rel="stylesheet" href="../slides.css" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+</head>
+<body id="slide" class="lightgrey">
+  <section class="content">
+    <article class="item">
+      <h1>REST Adapter</h1>
+      <h2>Relationships</h2>
+      <p>References to other records should be done by ID.</p>
+<pre><code class="javascript">
+App.Post = DS.Model.extend({
+  comments: DS.hasMany('App.Comment', {async: true})
+});
+</code></pre>
+    </article>
+  </section>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Introduction to Ember Data: Overview</title>
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1 id="introduction-to-ember-data">Introduction to Ember Data</h1>
+<h2 id="what-is-ember-data">What is Ember Data?</h2>
+<p><a href="https://github.com/emberjs/data">Ember Data</a> is a library that integrates tightly with Ember.js to make it easy to retrieve records from a server, cache them for performance, save updates back to the server, and create new records on the client.</p>
+<p>Ember Data can load and save records and their relationships served via a RESTful JSON API, provided it follows certain conventions.</p>
+<h2 id="emberjs">Ember.js</h2>
+<p>It's important to remember what makes the web special, "the web derives its power from the ability to bookmark and share URLs".</p>
+<p><a href="https://github.com/emberjs/ember.js">Ember.js</a> marries the tools and concepts of native GUI frameworks with support for the feature that makes the web so powerful: the URL</p>
+<p>If you're not building an application driven by data, there are tools for that. Ember.js may not be the strongest fit for every web application. If your application is primarily reading and consuming data, again Ember.js may not be the strongest fit for that need. </p>
+<p>However, if you're building a web application that supports users engaging and interacting with data, speaking JSON to your application server, then Ember.js is an excellent fit.</p>
+<h3 id="should-you-chose-ember-data">Should you chose Ember Data?</h3>
+<p>There are alternatives:</p>
+<ul>
+<li>DIY Store/Adapter (Sockets?)</li>
+<li>Ember Model</li>
+<li>Ember Persistence Foundation</li>
+</ul>
+<p>When using REST-like web service, Ember Data is a great fit. The RESTAdapter/Serializer and ActiveModelApapter/Serializer do the heavy lifting out of the box, and the Store finds, caches, loads related records pretty well.</p>
+<p>Are there bugs? Yes, this is beta software, get to know them by following the pull requests and tune into the converstations in the forums.</p>
+<h2 id="core-concepts">Core Concepts</h2>
+<h3 id="store">Store</h3>
+<p>The store is the central repository of records in your application. You can think of the store as a cache of all of the records available in your app. Both your application's controllers and routes have access to this shared store; when they need to display or modify a record, they will first ask the store for it.</p>
+<p>This instance of DS.Store is created for you automatically and is shared among all of the objects in your application.</p>
+<h3 id="models">Models</h3>
+<p>A model is a class that defines the properties and behavior of the data that you present to the user. Anything that the user expects to see if they leave your app and come back later (or if they refresh the page) should be represented by a model.</p>
+<h3 id="records">Records</h3>
+<p>A record is an instance of a model that contains data loaded from a server. Your application can also create new records and save them back to the server.</p>
+<p>Records are uniquely identified by two things:</p>
+<ul>
+<li>A model type.</li>
+<li>A globally unique ID.</li>
+</ul>
+<h3 id="adapter">Adapter</h3>
+<p>An adapter is an object that knows about your particular server backend and is responsible for translating requests for and changes to records into the appropriate calls to your server.</p>
+<p>For example, if your application asks for a person record with an ID of 1, how should Ember Data load it? Is it over HTTP or a WebSocket? If it's HTTP, is the URL /person/1 or /resources/people/1?</p>
+<h3 id="serializer">Serializer</h3>
+<p>A serializer is responsible for turning a raw JSON payload returned from your server into a record object.</p>
+<p>When the adapter gets a payload back for a particular record, it will give that payload to the serializer to normalize into the form that Ember Data is expecting.</p>
+<h3 id="automatic-caching">Automatic Caching</h3>
+<p>The store will automatically cache records for you. If a record had already been loaded, asking for it a second time will always return the same object instance. This minimizes the number of round-trips to the server, and allows your application to render UI to the user as fast as possible.</p>
+<h3 id="architecture-overview">Architecture Overview</h3>
+<p>Diagrams: Unloaded vs. Loaded</p>
+<h2 id="defining-relationships">Defining Relationships</h2>
+<ul>
+<li>One-to-one</li>
+<li>One-to-many</li>
+<li>Many-to-many</li>
+<li>Explicit Inverses</li>
+</ul>
+<h3 id="one-to-one">One-to-one</h3>
+<p>To declare a one-to-one relationship between two models, use DS.belongsTo:</p>
+<pre><code class="javascript">App.User = DS.Model.extend({
+  profile: DS.belongsTo('profile')
+});
+
+App.Profile = DS.Model.extend({
+  user: DS.belongsTo('user')
+});
+</code></pre>
+
+<h3 id="one-to-many">One-to-many</h3>
+<p>To declare a one-to-many relationship between two models, use DS.belongsTo in combination with DS.hasMany.</p>
+<pre><code class="javascript">App.Post = DS.Model.extend({
+  comments: DS.hasMany('comment')
+});
+
+App.Comment = DS.Model.extend({
+  post: DS.belongsTo('post')
+});
+</code></pre>
+
+<h3 id="many-to-many">Many-to-many</h3>
+<p>To declare a many-to-many relationship between two models, use DS.hasMany.</p>
+<pre><code class="javascript">App.Post = DS.Model.extend({
+  tags: DS.hasMany('tag')
+});
+
+App.Tag = DS.Model.extend({
+  posts: DS.hasMany('post')
+});
+</code></pre>
+
+<h3 id="explicit-inverses">Explicit Inverses</h3>
+<p>Sometimes you may have multiple belongsTo/hasManys for the same type. You can specify which property on the related model is the inverse using DS.hasMany's inverse option.</p>
+<pre><code class="javascript">var belongsTo = DS.belongsTo, hasMany = DS.hasMany;
+
+App.Comment = DS.Model.extend({
+  onePost: belongsTo('post'),
+  twoPost: belongsTo('post'),
+  redPost: belongsTo('post'),
+  bluePost: belongsTo('post')
+});
+
+App.Post = DS.Model.extend({
+  comments: hasMany('comment', {
+    inverse: 'redPost'
+  })
+});
+</code></pre>
+
+<h2 id="creating-and-deleting-records">Creating and Deleting Records</h2>
+<h3 id="creating-records">Creating Records</h3>
+<p>You can create records by calling the <code>createRecord</code> method of <code>this.store</code>.</p>
+<p>Watch out... that you cannot assign a promise as a relationship.You can easily set the relationship after the promise has fulfilled</p>
+<pre><code class="javascript">var store = this.store;
+
+var post = store.createRecord('post', {
+  title: 'Rails is Omakase',
+  body: 'Lorem ipsum'
+});
+
+store.find('user', 1).then(function(user) {
+  post.set('author', user);
+});
+</code></pre>
+
+<h3 id="deleting-records">Deleting Records</h3>
+<p>Call <code>deleteRecord()</code> on an instance of <code>DS.Model</code>; which flags the record as <code>isDeleted</code> and removes it from <code>all()</code> queries on the <code>store</code>. </p>
+<p>The deletion can then be persisted using <code>save()</code>.</p>
+<p>Alternatively, you can use the <code>destroyRecord</code> method to delete and persist at the same time.</p>
+<pre><code class="javascript">var post = store.find('post', 1);
+
+post.deleteRecord();
+
+post.get('isDeleted'); // =&gt; true
+
+post.save(); // =&gt; DELETE to /posts/1
+
+// OR
+
+var post = store.find('post', 2);
+
+post.destroyRecord(); // =&gt; DELETE to /posts/2
+</code></pre>
+
+<h2 id="pushing-records">Pushing Records</h2>
+<p>One way to think about the store is as a cache of all of the records that have been loaded by your application.</p>
+<p>Instead of waiting for the app to request a record, however, you can push records into the store's cache ahead of time.</p>
+<p>Another use case for pushing in records is if your application has a streaming connection to a backend.</p>
+<h3 id="application-route">Application Route</h3>
+<p>To push a record into the store, call the store's <code>push()</code> method.</p>
+<p>Preload some data using the <code>ApplicationRoute</code> is
+the top-most route in the route hierarchy, its <code>model</code> hook gets called once when the app starts up.</p>
+<pre><code class="javascript">App.Album = DS.Model.extend({
+  title: DS.attr(),
+  artist: DS.attr(),
+  songCount: DS.attr()
+});
+
+App.ApplicationRoute = Ember.Route.extend({
+  model: function() {
+    this.store.push('album', {
+      id: 1,
+      title: &quot;Fewer Moving Parts&quot;,
+      artist: &quot;David Bazan&quot;,
+      songCount: 10
+    });
+  }
+});
+</code></pre>
+
+<h2 id="persisting-records">Persisting Records</h2>
+<p>Records in Ember Data are persisted on a per-instance basis. Call <code>save()</code> on any instance of <code>DS.Model</code> and it will make a network request.</p>
+<pre><code class="javascript">var post = store.createRecord('post', {
+  title: 'Rails is Omakase',
+  body: 'Lorem ipsum'
+});
+
+post.save(); // =&gt; POST to '/posts'
+</code></pre>
+
+<h2 id="finding-records">Finding Records</h2>
+<p>The Ember Data store provides a simple interface for finding records of a single type through the <code>store</code> object's <code>find</code> method.</p>
+<h3 id="finding-all-records-of-a-type">Finding All Records of a Type</h3>
+<pre><code class="javascript">var posts = this.store.find('post'); // =&gt; GET /posts
+</code></pre>
+
+<p>To get a list of records already loaded into the store, without making another network request, use <code>all</code> instead.</p>
+<pre><code class="javascript">var posts = this.store.all('post'); // =&gt; no network request
+</code></pre>
+
+<h3 id="caveat-returns-promise-array">Caveat: Returns Promise Array</h3>
+<p><code>find</code> returns a <code>DS.PromiseArray</code> that fulfills to a <code>DS.RecordArray</code> and <code>all</code> directly returns a <code>DS.RecordArray</code>.</p>
+<p>It's important to note that <code>DS.RecordArray</code> is not a JavaScript array.</p>
+<h3 id="finding-a-single-record">Finding a Single Record</h3>
+<p>Provide a number or string as the second argument to <code>store.find()</code>. This will return a promise that fulfills with the requested record:</p>
+<pre><code class="javascript">var aSinglePost = this.store.find('post', 1); // =&gt; GET /posts/1
+</code></pre>
+
+<h3 id="querying-for-records">Querying For Records</h3>
+<p>If you provide a plain object as the second argument to <code>find</code>, Ember Data will make a <code>GET</code> request with the object serialized as query params. </p>
+<p>This method returns
+<code>DS.PromiseArray</code> in the same way as <code>find</code> with no second argument.</p>
+<h3 id="query-example">Query Example</h3>
+<p>We could search for all <code>person</code> models who have the name of
+<code>Peter</code>:</p>
+<pre><code class="javascript">var peters = this.store.find('person', { name: &quot;Peter&quot; }); // =&gt; GET to /persons?name='Peter'
+</code></pre>
+
+<h3 id="integrating-with-the-routes-model-hook">Integrating with the Route's Model Hook</h3>
+<p>Routes are responsible for telling their template which model to render.</p>
+<p><code>Ember.Route</code>'s <code>model</code> hook supports asynchronous values
+out-of-the-box. If you return a promise from the <code>model</code> hook, the
+router will wait until the promise has fulfilled to render the
+template.</p>
+<pre><code class="javascript">App.Router.map(function() {
+  this.resource('posts');
+  this.resource('post', { path: ':post_id' });
+});
+
+App.PostsRoute = Ember.Route.extend({
+  model: function() {
+    return this.store.find('post');
+  }
+});
+
+App.PostRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('post', params.post_id);
+  }
+})
+</code></pre>
+
+<h2 id="rest-adapter">REST Adapter</h2>
+<p>By default, your store will use <code>DS.RESTAdapter</code> to load and save records. The RESTAdapter assumes that the URLs and JSON
+associated with each model are conventional.</p>
+<p>If you follow the conventions, you will not need to configure the adapter to get started.</p>
+<h3 id="url-conventions">URL Conventions</h3>
+<p>The REST adapter determines the URLs it communicates with, based on the name of the model. </p>
+<p>Ask for a <code>Post</code> by ID:</p>
+<pre><code class="javascript">var post = store.find('post', 1);
+</code></pre>
+
+<p>The REST adapter will automatically send a <code>GET</code> request to <code>/posts/1</code>.</p>
+<h3 id="verbs-and-nouns">Verbs and Nouns</h3>
+<p>Actions map to the following URLs in the REST adapter:</p>
+<table>
+  <thead>
+    <tr><th>Action</th><th>HTTP Verb</th><th>URL</th></tr>
+  </thead>
+  <tbody>
+    <tr><th>Find</th><td>GET</td><td>/people/123</td></tr>
+    <tr><th>Find All</th><td>GET</td><td>/people</td></tr>
+    <tr><th>Update</th><td>PUT</td><td>/people/123</td></tr>
+    <tr><th>Create</th><td>POST</td><td>/people</td></tr>
+    <tr><th>Delete</th><td>DELETE</td><td>/people/123</td></tr>
+  </tbody>
+</table>
+
+<h3 id="json-conventions">JSON Conventions</h3>
+<p>When requesting a record, the REST adapter expects your server to return a JSON representation of the record that conforms to Ember Data conventions.</p>
+<h4 id="json-root">JSON Root</h4>
+<p>The primary record being returned should be in a named root.</p>
+<p>If you request a record from <code>/people/123</code>, the response should be nested inside a property called <code>person</code>.</p>
+<pre><code class="javascript">{
+  &quot;person&quot;: {
+    &quot;firstName&quot;: &quot;Jeff&quot;,
+    &quot;lastName&quot;: &quot;Atwood&quot;
+  }
+}
+</code></pre>
+
+<h4 id="attribute-names">Attribute Names</h4>
+<p>Attribute names should be camelized.  For example, if you have a model like this:</p>
+<pre><code class="javascript">App.Person = DS.Model.extend({
+  firstName: DS.attr('string'),
+  lastName: DS.attr('string'),
+
+  isPersonOfTheYear: DS.attr('boolean')
+});
+</code></pre>
+
+<p>The JSON returned from your server should look like this:</p>
+<pre><code class="javascript">{
+  &quot;person&quot;: {
+    &quot;firstName&quot;: &quot;Barack&quot;,
+    &quot;lastName&quot;: &quot;Obama&quot;,
+    &quot;isPersonOfTheYear&quot;: true
+  }
+}
+</code></pre>
+
+<h4 id="relationships">Relationships</h4>
+<p>References to other records should be done by ID. For example, if you have a model with a <code>hasMany</code> relationship:</p>
+<pre><code class="javascript">App.Post = DS.Model.extend({
+  comments: DS.hasMany('App.Comment', {async: true})
+});
+</code></pre>
+
+<p>The JSON should encode the relationship as an array of IDs:</p>
+<pre><code class="javascript">{
+  &quot;post&quot;: {
+    &quot;comments&quot;: [1, 2]
+  }
+}
+</code></pre>
+
+<p><code>Comments</code> for a <code>post</code> can be loaded by <code>post.get('comments')</code>. The REST adapter
+will send a <code>GET</code> request to <code>/comments?ids[]=1&amp;ids[]=2&amp;ids[]=3</code>.</p>
+<p>Any <code>belongsTo</code> relationships in the JSON representation should be the
+camelized version of the Ember Data model's name, with the string
+<code>Id</code> appended. For example, if you have a model:</p>
+<pre><code class="js">App.Comment = DS.Model.extend({
+  post: DS.belongsTo('App.Post')
+});
+</code></pre>
+
+<p>The JSON should encode the relationship as an ID to another record:</p>
+<pre><code class="javascript">{
+  &quot;comment&quot;: {
+    &quot;post&quot;: 1
+  }
+}
+</code></pre>
+
+<p>If needed these naming conventions can be overwritten by implementing
+the <code>keyForRelationship</code> method.</p>
+<pre><code class="javascript"> App.ApplicationSerializer = DS.RESTSerializer.extend({
+   keyForRelationship: function(key, relationship) {
+      return key + 'Ids';
+   }
+ });
+ ```
+
+#### Sideloaded Relationships
+
+<p>To reduce the number of HTTP requests necessary, you can sideload additional records in your JSON response. Sideloaded records live outside the JSON root, and are represented as an array of hashes.</p>
+
+<pre><code class="javascript">
+{
+  &quot;post&quot;: {
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Node is not omakase&quot;,
+    &quot;comments&quot;: [1, 2]
+  },
+
+  &quot;comments&quot;: [{
+    &quot;id&quot;: 1,
+    &quot;body&quot;: &quot;But is it _lightweight_ omakase?&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;body&quot;: &quot;I for one welcome our new omakase overlords&quot;
+  }]
+}
+</code></pre>
+
+<h3 id="creating-custom-transformations">Creating Custom Transformations</h3>
+<p>In some circumstances, the built in attribute types of <code>string</code>,
+<code>number</code>, <code>boolean</code>, and <code>date</code> may be inadequate. For example, a
+server may return a non-standard date format.</p>
+<p>Ember Data can have new JSON transforms registered for use as attributes.</p>
+<pre><code class="javascript">App.CoordinatePointTransform = DS.Transform.extend({
+  serialize: function(value) {
+    return [value.get('x'), value.get('y')];
+  },
+  deserialize: function(value) {
+    return Ember.create({ x: value[0], y: value[1] });
+  }
+});
+App.Cursor = DS.Model.extend({
+  position: DS.attr('coordinatePoint')
+});
+</code></pre>
+
+<h2 id="adapterserializer-walk-through">Adapter/Serializer Walk Through</h2>
+<ul>
+<li><a href="https://github.com/pixelhandler/ember-data-extensions">ember-data-extensions</a></li>
+<li><a href="http://discuss.emberjs.com/t/extend-ds-activemodelserializer-support-for-embedded-objects-belongsto-relationship-using-has-one">Proposal on discuss</a></li>
+<li><a href="https://github.com/pixelhandler/ember-data-extensions/wiki">wiki</a></li>
+<li><a href="http://pixelhandler.github.io/ember-data-extensions/docs/">generated docs</a></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Introduction to Ember Data: Models - Defining Relationships : Explicit Inverses</title>
+  <link rel="stylesheet" href="../slides.css" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+</head>
+<body id="slide" class="code lightgrey">
+  <section class="content">
+    <article class="item">
+<pre><code class="javascript">
+var belongsTo = DS.belongsTo, hasMany = DS.hasMany;
+
+App.Comment = DS.Model.extend({
+  onePost: belongsTo('post'),
+  twoPost: belongsTo('post'),
+  redPost: belongsTo('post'),
+  bluePost: belongsTo('post')
+});
+
+App.Post = DS.Model.extend({
+  comments: hasMany('comment', {
+    inverse: 'redPost'
+  })
+});
+</code></pre>
+  </section>
+</body>
+</html>

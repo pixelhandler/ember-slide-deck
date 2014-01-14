@@ -96,7 +96,7 @@ body#slide{
 
 #slide h1 {
   color: white;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   font-size: 2.25rem;
 }
 
@@ -119,4 +119,9 @@ body#slide{
 
 #slide p span, #slide li span {
   color: rgba(149, 119, 72, 1);
+}
+
+#slide pre code {
+  font-size: 1.5rem;
+  color: rgba(107, 155, 204, 1);
 }

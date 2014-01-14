@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Introduction to Ember Data: Core Concepts - Architecture Overview</title>
+  <link rel="stylesheet" href="../slides.css" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+</head>
+<body id="slide" class="title lightgrey">
+  <section class="content">
+    <article class="item">
+      <h2>Architecture Overview:</h2>
+      <figure>
+        <figcaption>&lt;- Unloaded</figcaption>
+        <img src="finding-unloaded-record-step1-diagram.png" title="adapter must make an asynchronous request to the server, and only when that request finishes loading can the record be created with its backing data" height="370">
+        <img src="finding-unloaded-record-step2-diagram.png" title="Once the request to the server returns with a JSON payload for the requested record, the adapter resolves the promise it returned to the store with the JSON. The store then takes that JSON, initializes the record with the JSON data, and resolves the promise returned to your application with the newly-loaded record." height="370">
+        <img src="finding-loaded-record-diagram.png" title="In this case, because the store already knew about the record, it returns a promise that it resolves with the record immediately. It does not need to ask the adapter (and, therefore, the server) for a copy since it already has it saved locally.">
+        <figcaption>Loaded -&gt;</figcaption>
+      </figure>
+    </article>
+  </section>
+</body>
+</html>

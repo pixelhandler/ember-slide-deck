@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Introduction to Ember Data: REST Adapter - JSON Root</title>
+  <link rel="stylesheet" href="../slides.css" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+</head>
+<body id="slide" class="lightgrey">
+  <section class="content">
+    <article class="item">
+      <h1>REST Adapter</h1>
+      <h2>JSON Root: The primary record should be in a named root</h2>
+      <p>Request for <span>/people/123</span>, should return an <span>person</span> object</p>
+<pre><code class="javascript">
+{
+  &quot;person&quot;: {
+    &quot;firstName&quot;: &quot;Jeff&quot;,
+    &quot;lastName&quot;: &quot;Atwood&quot;
+  }
+}
+</code></pre>
+    </article>
+  </section>
+</body>
+</html>

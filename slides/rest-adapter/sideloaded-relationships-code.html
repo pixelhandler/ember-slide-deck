@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Introduction to Ember Data: REST Adapter - Sideloaded Relationships</title>
+  <link rel="stylesheet" href="../slides.css" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+</head>
+<body id="slide" class="lightgrey">
+  <section class="content">
+    <article class="item">
+      <pre><code class="javascript">
+{
+  &quot;post&quot;: {
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Node is not omakase&quot;,
+    &quot;comments&quot;: [1, 2]
+  },
+  &quot;comments&quot;: [{
+    &quot;id&quot;: 1,
+    &quot;body&quot;: &quot;But is it _lightweight_ omakase?&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;body&quot;: &quot;I for one welcome our new omakase overlords&quot;
+  }]
+}
+</code></pre>
+    </article>
+  </section>
+</body>
+</html>

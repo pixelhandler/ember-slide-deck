@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Introduction to Ember Data: Store - Finding Records: Query Example</title>
+  <link rel="stylesheet" href="../slides.css" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+</head>
+<body id="slide" class="lightgrey">
+  <section class="content">
+    <article class="item">
+      <h1>Store</h1>
+      <h2>Finding Records - Query Example</h2>
+      <p>We could search for all <span>person</span> models who have the name of
+<span>Peter</span>:</p>
+<pre><code class="javascript">
+var peters = this.store.find('person', { name: &quot;Peter&quot; });
+// =&gt; GET to /persons?name='Peter'
+</code></pre>
+    </article>
+  </section>
+</body>
+</html>

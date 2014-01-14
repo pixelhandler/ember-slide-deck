@@ -11,17 +11,10 @@
   </script>
 
   <script type="text/x-handlebars" id="slides">
-    {{#each model}}
-      {{#if filename}}
-        {{#linkTo 'slide' this}}
-          <img {{bindAttr src="filename"}}>
-        {{/linkTo}}
-      {{/if}}
-      {{#if iframeUrl}}
-        <a {{bindAttr href="iframeUrl"}}>{{iframeUrl}}</a>
-        <br>
-      {{/if}}
-    {{/each}}
+    <button {{action 'begin'}}>Begin</button>
+    <div class="slide">
+      <iframe src="slides/overview/" seamless="seamless"></iframe>
+    </div>
   </script>
 
   <script type="text/x-handlebars" id="slide">

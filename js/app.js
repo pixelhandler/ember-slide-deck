@@ -79,11 +79,7 @@ App.IndexRoute = Ember.Route.extend({
   }
 });
 
-App.SlidesRoute = Ember.Route.extend({
-  model: function() {
-    return this.store.find('slide');//App.Slide.find();
-  }
-});
+App.SlidesRoute = Ember.Route.extend({});
 
 App.SlideRoute = Ember.Route.extend({
   model: function(params) {
@@ -105,7 +101,12 @@ App.SlideRoute = Ember.Route.extend({
 
 // Controllers
 App.SlidesController = Ember.ArrayController.extend({
-  sortProperties: ['id']
+  sortProperties: ['id'],
+  actions: {
+    begin: function () {
+      window.document.location = '#/slides/0';
+    }
+  }
 });
 
 App.SlideController = Ember.Controller.extend({

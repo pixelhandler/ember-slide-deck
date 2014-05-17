@@ -7,7 +7,7 @@ html, body {
 section, article {
   padding: 1em 2em 0;
   margin-bottom: 1em;
-  border-radius: 3px;
+  border-radius: 5px;
   -webkit-box-direction: normal;
 }
 

@@ -4,6 +4,12 @@ html, body {
   padding: 0;
   text-align: left;
 }
+input {
+  position: absolute;
+  display: block;
+  left: -999em;
+}
+
 .slides img {
   max-width: 102px;
   max-height: 77px;
@@ -19,11 +25,6 @@ html, body {
   padding: 0;
   height: 100%;
   overflow: hidden;
-}
-.slide input {
-  position: absolute;
-  display: block;
-  left: -999em;
 }
 .slide img {
   height: 100%;

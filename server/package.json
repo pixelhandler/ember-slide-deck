@@ -6,7 +6,7 @@
   "author": [
     "Bill Heaton"
   ],
-  "version": "1.0.0-beta.4",
+  "version": "0.5.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/pixelhandler/ember-slide-deck"
@@ -14,16 +14,14 @@
   "engines": {
     "node": "~0.10"
   },
-  "scripts": {
-    "build": "brunch b",
-    "test": "testem"
+  "dependencies": {
+    "express": "~3.4.2",
+    "cors": "*",
+    "rethinkdb": "*",
+    "debug": "*",
+    "inflect": "~0.3.0"
   },
-  "dependencies": {},
   "devDependencies": {
-    "bower": ">= 1.2.8",
-    "testem": ">= 0.6.2",
-    "brunch": ">= 1.7.0",
-    "javascript-brunch": "~1.7.0",
-    "jshint": ">= 2.4.0"
+    "bower": ">= 1.2.8"
   }
 }

@@ -1,0 +1,18 @@
+2014-05-17T03:10:09.983006000 0.299953s info: Creating directory /Volumes/devbox/ember-slide-deck/server/rethinkdb_data
+2014-05-17T03:10:09.988657000 0.305605s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/Volumes/devbox/ember-slide-deck/server/rethinkdb_data' did not already exist.)
+2014-05-17T03:10:09.988771000 0.305718s info: Running rethinkdb 1.12.4 (CLANG 5.1 (clang-503.0.40))...
+2014-05-17T03:10:09.998565000 0.315513s info: Running on Darwin 13.1.0 x86_64
+2014-05-17T03:10:09.998608000 0.315555s info: Using cache size of 2204 MB
+2014-05-17T03:10:09.998634000 0.315582s info: Loading data from directory /Volumes/devbox/ember-slide-deck/server/rethinkdb_data
+2014-05-17T03:10:10.443578000 0.760525s info: Listening for intracluster connections on port 29015
+2014-05-17T03:10:10.446699000 0.763647s info: Listening for client driver connections on port 28015
+2014-05-17T03:10:10.446814000 0.763761s info: Listening for administrative HTTP connections on port 8080
+2014-05-17T03:10:10.446815000 0.763763s info: Listening on addresses: 127.0.0.1, ::1
+2014-05-17T03:10:10.446824000 0.763771s info: To fully expose RethinkDB on the network, bind to all addresses
+2014-05-17T03:10:10.446832000 0.763780s info: by running rethinkdb with the `--bind all` command line option.
+2014-05-17T03:10:10.446841000 0.763788s info: Server ready
+2014-05-17T03:49:42.740491000 2373.077695s info: Server got SIGINT from pid 52630, uid 502; shutting down...
+2014-05-17T03:49:42.740811000 2373.078015s info: Shutting down client connections...
+2014-05-17T03:49:42.741207000 2373.078410s info: All client connections closed.
+2014-05-17T03:49:42.741214000 2373.078417s info: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2014-05-17T03:49:42.751590000 2373.088793s info: Storage engine shut down.

@@ -10,13 +10,23 @@ var App = Ember.Application.create({
 });
 
 // Adapter
-App.ApplicationAdapter = DS.FixtureAdapter.extend();
+// App.ApplicationAdapter = DS.FixtureAdapter.extend();
+App.ApplicationAdapter = DS.RESTAdapter.extend({
+  host: 'http://localhost:8888'
+});
 
 // Model
 App.Slide = DS.Model.extend({
   iframeUrl: DS.attr('string'),
   filename: DS.attr('string'),
-  milliseconds: DS.attr('number')
+  segue: DS.attr('string'),
+  title: DS.attr('string'),
+  body: DS.attr('string'),
+  milliseconds: DS.attr('number'),
+
+  hasContent: function () {
+    return this.get('title') || this.get('body')
+  }.property('title', 'body'),
 });
 
 // States
@@ -79,11 +89,15 @@ App.IndexRoute = Ember.Route.extend({
   }
 });
 
-App.SlidesRoute = Ember.Route.extend({});
+App.SlidesRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('slide');
+  },
+});
 
 App.SlideRoute = Ember.Route.extend({
   model: function(params) {
-    return this.store.find('slide', params.slide_id);//App.Slide.find(params.slide_id);
+    return this.store.find('slide', params.slide_id);
   },
   actions: {
     previous: function () {
@@ -127,20 +141,40 @@ App.SlideController = Ember.Controller.extend({
 });
 
 // Views
+App.ApplicationView = Ember.View.extend({
+  tagName: 'span'
+});
+
 App.SlidesView = Ember.View.extend({
+  tagName: 'span',
   classNames: ['slides']
 });
 
 App.SlideView = Ember.View.extend({
+  tagName: 'span',
   classNames: ['slide'],
-  keyDown: function(e) {
-    this.get('controller').send('updateKey', e.keyCode);
-  },
   didInsertElement: function() {
-    $('head title').text([
-        'Ember Slide Deck',
-        this.get('context.model.filename')
-    ].join(' | '));
-    return this.$('input').focus();
+    var controller = this.get('controller');
+    $(document).on('keydown', function (e) {
+      e.preventDefault();
+      if (e.keyCode) {
+        controller.send('updateKey', e.keyCode);
+      }
+      return false;
+    });
+
+    return $('input').focus();
   }
+});
+
+App.SlideSegueView = Ember.View.extend({
+  tagName: 'span',
+  classNames: ['slide-segue'],
+  templateName: 'slide-segue'
+});
+
+App.SlideContentView = Ember.View.extend({
+  tagName: 'span',
+  classNames: ['slide-content'],
+  templateName: 'slide-content'
 });

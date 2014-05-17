@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ember Slide Deck</title>
+  <link href="css/style.css" rel="stylesheet" >
+  <link href="css/slides.css" rel="stylesheet" >
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <script type="text/x-handlebars" id="application">
+    {{ outlet }}
+  </script>
+
+  <script type="text/x-handlebars" id="slides">
+    <button {{action 'begin'}}>Begin</button>
+  </script>
+
+  <script type="text/x-handlebars" id="slide">
+    {{#with model}}
+      {{#if filename}}
+        <img {{bindAttr src="filename"}}>
+      {{/if}}
+      {{#if iframeUrl}}
+        <iframe {{bindAttr src="iframeUrl"}} seamless="seamless"></iframe>
+      {{/if}}
+      {{#if segue}}
+        {{view App.SlideSegueView}}
+      {{/if}}
+      {{#if hasContent}}
+        {{view App.SlideContentView}}
+      {{/if}}
+    {{/with}}
+  </script>
+
+  <script type="text/x-handlebars" id="slide-segue">
+    <div id="slide" class="title lightgrey">
+      <section class="centered hero">
+        <article class="item">
+          <h1>{{{segue}}}</h1>
+        </article>
+      </section>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="slide-content">
+    <div id="slide" class="lightgrey">
+      <section class="content">
+        <article class="item">
+          {{#if title}}
+            <h1>{{title}}</h1>
+          {{/if}}
+          {{{body}}}
+        </article>
+      </section>
+    </div>
+  </script>
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/handlebars/handlebars.js"></script>
+  <script src="bower_components/ember/ember.js"></script>
+  <script src="bower_components/ember-state-manager/dist/ember-states.js"></script>
+  <script src="bower_components/ember-data/ember-data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/fixtures.js"></script>
+  <input type="text" value="">
+</body>
+</html>

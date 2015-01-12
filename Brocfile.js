@@ -18,5 +18,6 @@ var app = new EmberApp();
 // along with the exports of each module as its value.
 
 app.import('vendor/ember-states.js');
+app.import('vendor/normalize.css');
 
 module.exports = app.toTree();

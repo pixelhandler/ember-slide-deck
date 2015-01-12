@@ -1,8 +1,17 @@
 {{#if model.filename}}
-  <img {{bind-attr src="model.filename"}}>
+  <section class="filename">
+    <img {{bind-attr src="model.filename"}}>
+  </section>
 {{/if}}
 {{#if model.iframeUrl}}
-  <iframe {{bind-attr src="model.iframeUrl"}} seamless="seamless"></iframe>
+  <section class="iframeUrl">
+    <iframe {{bind-attr src="model.iframeUrl"}} seamless="seamless"></iframe>
+  </section>
+{{/if}}
+{{#if model.markdown}}
+  <section class="markdown">
+    {{showdown-addon model.markdown}}
+  </section>
 {{/if}}
 <input type="text" value="">
 

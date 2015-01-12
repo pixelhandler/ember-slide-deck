@@ -42,7 +42,8 @@ var fixtures = [
   { id: '7', filename: 'http://fpoimg.com/800x600?text=Slide-B2', milliseconds: 300 },
   { id: '8', filename: 'http://fpoimg.com/800x600?text=Slide-B3' },
   { id: '9', filename: 'http://fpoimg.com/800x600?text=The End'},
-  { id: '10', iframeUrl: 'http://dev.w3.org/html5/markup/iframe.html#iframe'}
+  { id: '10', iframeUrl: 'http://dev.w3.org/html5/markup/iframe.html#iframe'},
+  { id: '11', markdown: '# And one more thing, Markdown :)', format: 'title'}
 ];
 
 var slideById = function(id) {

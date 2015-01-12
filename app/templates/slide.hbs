@@ -1,0 +1,9 @@
+{{#if model.filename}}
+  <img {{bind-attr src="model.filename"}}>
+{{/if}}
+{{#if model.iframeUrl}}
+  <iframe {{bind-attr src="model.iframeUrl"}} seamless="seamless"></iframe>
+{{/if}}
+<input type="text" value="">
+
+{{outlet}}

@@ -5,5 +5,7 @@ export default DS.Model.extend({
   filename: DS.attr('string'),
   markdown: DS.attr('string'),
   format: DS.attr('string'),
+  code: DS.attr('string'),
+  lang: DS.attr('string'),
   milliseconds: DS.attr('number')
 });

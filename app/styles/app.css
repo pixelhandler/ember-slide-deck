@@ -1,7 +1,6 @@
 html, body, .ember-application > div, section {
   margin: 0;
   padding: 0;
-  text-align: center;
   width: 100%;
   height: 100%;
 }
@@ -38,4 +37,13 @@ html, body, .ember-application > div, section {
 .slide iframe {
   width: 100%;
   height: 100%;
+}
+
+.slide.title {
+  font-size: 3em;
+}
+
+.slide.code {
+  font-size: 2em;
+  text-align: left;
 }

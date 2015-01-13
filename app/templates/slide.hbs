@@ -1,0 +1,23 @@
+{{#if model.filename}}
+  <section class="filename">
+    <img {{bind-attr src="model.filename"}}>
+  </section>
+{{/if}}
+{{#if model.iframeUrl}}
+  <section class="iframeUrl">
+    <iframe {{bind-attr src="model.iframeUrl"}} seamless="seamless"></iframe>
+  </section>
+{{/if}}
+{{#if model.markdown}}
+  <section class="markdown">
+    {{showdown-addon model.markdown}}
+  </section>
+{{/if}}
+{{#if model.code}}
+  <section class="code">
+    {{eg-code-highlight code=model.code language=model.lang}}
+  </section>
+{{/if}}
+<input type="text" value="">
+
+{{outlet}}

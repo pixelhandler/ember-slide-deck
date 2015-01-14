@@ -1,12 +1,17 @@
-{{#each model}}
-  {{#if filename}}
-    {{#link-to 'slide' this}}
-      <img {{bind-attr src="filename"}}>
+{{#each slide in model}}
+  {{#if slide.filename}}
+    {{#link-to 'slide' slide}}
+      <img {{bind-attr src=slide.filename}}>
     {{/link-to}}
   {{/if}}
-  {{#if iframeUrl}}
-    <a {{bind-attr href="iframeUrl"}}>{{iframeUrl}}</a>
+  {{#if slide.iframeUrl}}
+    <a {{bind-attr href=slide.iframeUrl}}>{{slide.iframeUrl}}</a>
     <br>
+  {{/if}}
+  {{#if slide.markdown}}
+    {{#link-to 'slide' slide}}
+      {{slide.markdown}}
+    {{/link-to}}
   {{/if}}
 {{/each}}
 

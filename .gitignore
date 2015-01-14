@@ -13,6 +13,7 @@ rethinkdb_dump_*
 /bower_components
 
 # misc
+.DS_Store
 /.sass-cache
 /connect.lock
 /coverage/*

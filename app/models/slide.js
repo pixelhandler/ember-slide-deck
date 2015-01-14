@@ -1,6 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
+  slug: DS.attr('string'),
+  order: DS.attr('number'),
   iframeUrl: DS.attr('string'),
   filename: DS.attr('string'),
   markdown: DS.attr('string'),

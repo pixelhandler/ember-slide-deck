@@ -2,14 +2,21 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(params) {
-    return this.store.find('slide', params.slide_id);
+    var slide = this.store.filter('slide', function (model) {
+      return model.get('slug') === params.slide_slug;
+    });
+    return slide.get('firstObject') || this.store.find('slide', params.slide_slug);
+  },
+
+  serialize: function (model) {
+    return { slide_slug: model.get('slug') };
   },
 
   actions: {
 
     previous: function () {
-      var id = '' + (+this.get('currentModel.id') - 1);
-      window.document.location = '#/slides/' + id;
+      var slug = '' + (+this.get('currentModel.slug') - 1);
+      window.document.location = '#/slides/' + slug;
     },
 
     next: function () {

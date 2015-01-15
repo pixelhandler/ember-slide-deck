@@ -1,4 +1,6 @@
+<ol>
 {{#each slide in model}}
+  <li>
   {{#if slide.filename}}
     {{#link-to 'slide' slide}}
       <img {{bind-attr src=slide.filename}}>
@@ -6,13 +8,18 @@
   {{/if}}
   {{#if slide.iframeUrl}}
     <a {{bind-attr href=slide.iframeUrl}}>{{slide.iframeUrl}}</a>
-    <br>
   {{/if}}
   {{#if slide.markdown}}
     {{#link-to 'slide' slide}}
       {{slide.markdown}}
     {{/link-to}}
   {{/if}}
+  </li>
 {{/each}}
+</ol>
+
+{{showdown-addon model.outline}}
+
+{{textarea value=model.outline}}
 
 {{outlet}}

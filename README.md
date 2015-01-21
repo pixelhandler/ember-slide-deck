@@ -2,7 +2,7 @@
 
 This browser app is a presentation tool. Slide formats include: 
 images (filename), iframe (url), markdown (text), and code. It uses 
-RethinkDB for storing slides in JSON documents, see the [data] 
+RethinkDB for storing slides in JSON documents, see the [data](data) 
 directory for the demo database contents.
 
 ## Prerequisites
@@ -18,9 +18,13 @@ directory for the demo database contents.
 
 Here is a [Ten-minute guide] on [RethinkDB]
 
-For developers on a mac, install with [Homebrew](http://brew.sh)
+For developers on a mac, install with [Homebrew]
 
     brew update && brew install rethinkdb
+
+[Ten-minute guide]: http://www.rethinkdb.com/docs/guide/javascript/
+[RethinkDB]: http://www.rethinkdb.com
+[Homebrew]: http://brew.sh
 
 ## Installation
 

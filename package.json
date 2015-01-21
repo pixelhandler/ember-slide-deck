@@ -1,7 +1,7 @@
 {
   "name": "ember-slide-deck",
-  "version": "0.0.0",
-  "description": "Presentation application written in Ember.js in slideshow format",
+  "version": "0.1.0",
+  "description": "Presentation application written in Ember.js, slides in JSON format",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -10,14 +10,16 @@
   "scripts": {
     "install_db": "./bin/install_rethinkdb.sh",
     "db": "rethinkdb",
-    "setup": "./bin/setup_db.js && npm run restore",
     "restore": "rethinkdb restore ./data/demo.tar.gz --force",
     "dump": "rethinkdb dump -f ./data/demo.tar.gz",
     "start": "ember server",
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pixelhandler/ember-slide-deck"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },

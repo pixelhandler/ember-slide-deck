@@ -1,3 +1,4 @@
+<h1>Slide Deck</h1>
 <ol>
 {{#each slide in model}}
   <li>
@@ -14,12 +15,19 @@
       {{slide.markdown}}
     {{/link-to}}
   {{/if}}
+  {{#if slide.code}}
+    {{#link-to 'slide' slide}}
+      {{slide.format}}
+    {{/link-to}}
+  {{/if}}
   </li>
 {{/each}}
 </ol>
-
+<hr>
+<h2>Outline</h2>
 {{showdown-addon model.outline}}
-
+<hr>
+<h3>Markdown Outline</h3>
 {{textarea value=model.outline}}
 
 {{outlet}}

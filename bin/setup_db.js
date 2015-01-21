@@ -12,7 +12,7 @@ var settings = {
 r.connect(settings, function (err, conn) {
   if (err) { throw err; }
 
-  var dbBame = 'deck', dbTable = 'slides';
+  var dbBame = 'http_mocks_db', dbTable = 'slides';
 
   async.series([
     function (callback) {

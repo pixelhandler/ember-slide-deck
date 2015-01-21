@@ -12,6 +12,7 @@
     "db": "rethinkdb",
     "setup": "./bin/setup_db.js && npm run restore",
     "restore": "rethinkdb restore ./data/demo.tar.gz --force",
+    "dump": "rethinkdb dump -f ./data/demo.tar.gz",
     "start": "ember server",
     "build": "ember build",
     "test": "ember test"
@@ -26,7 +27,7 @@
     "async": "^0.9.0",
     "broccoli-asset-rev": "^2.0.0",
     "connect-restreamer": "^1.0.1",
-    "ember-cli": "0.1.6",
+    "ember-cli": "0.1.7",
     "ember-cli-content-security-policy": "0.3.0",
     "ember-cli-dependency-checker": "0.0.7",
     "ember-cli-eg-code-highlight": "^0.1.3",
@@ -37,10 +38,10 @@
     "ember-cli-showdown": "^0.1.3",
     "ember-data": "^1.0.0-beta.14.1",
     "ember-export-application-global": "^1.0.0",
+    "ember-http-mocks-rethinkdb-adapter": "^0.1.3",
     "express": "^4.8.5",
     "glob": "^4.0.5",
     "morgan": "^1.5.1",
-    "rethinkdb": "^1.15.0",
-    "rethinkdb_adapter": "^0.1.1"
+    "rethinkdb_adapter": "^0.1.2"
   }
 }

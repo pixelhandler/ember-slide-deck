@@ -74,10 +74,18 @@ html, body, .ember-application > div, section {
   height: 100%;
   overflow: hidden;
 }
-.slide input {
+input {
   position: absolute;
   display: block;
-  left: -999em;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  z-index: 1;
+}
+input:focus {
+  outline: none;
 }
 .slide img {
   height: 100%;

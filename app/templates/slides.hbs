@@ -17,7 +17,7 @@
   {{/if}}
   {{#if slide.code}}
     {{#link-to 'slide' slide}}
-      {{slide.format}}
+      Source Code
     {{/link-to}}
   {{/if}}
   </li>
@@ -25,7 +25,7 @@
 </ol>
 <hr>
 <h2>Outline</h2>
-{{showdown-addon model.outline}}
+{{markdown-to-html markdown=model.outline}}
 <hr>
 <h3>Markdown Outline</h3>
 {{textarea value=model.outline}}

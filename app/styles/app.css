@@ -27,8 +27,17 @@ p {
   font-family: 'Fira Mono';
   font-size: 1em;
 }
+pre {
+  overflow: scroll;
+}
+code {
+  color: rgb(86, 167, 237);
+}
 a, a:link, a:visited, a:hover, a:active {
-  color: azure;
+  color: #FCCC37;
+}
+em {
+  color: rgb(86, 167, 237);
 }
 
 html, body, .ember-application > div, section {
@@ -96,19 +105,23 @@ input:focus {
   height: 100%;
 }
 .slide h1, .slide h2, .slide h3 {
-  color: azure;
+  color: #FCCC37;
+  margin: 1em;
 }
-.slide .markdown {
+.slide h1 a, .slide h2 a, .slide h3 a {
+  text-decoration: none;
+}
+.slide .markdown, .slide .code {
   color: #ffffff;
 
   /* http://www.colorzilla.com/gradient-editor/ */
-  background: #b5bdc8; /* Old browsers */
-  background: -moz-linear-gradient(45deg,  #b5bdc8 0%, #828c95 24%, #24323a 82%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#b5bdc8), color-stop(24%,#828c95), color-stop(82%,#24323a)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(45deg,  #b5bdc8 0%,#828c95 24%,#24323a 82%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(45deg,  #b5bdc8 0%,#828c95 24%,#24323a 82%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(45deg,  #b5bdc8 0%,#828c95 24%,#24323a 82%); /* IE10+ */
-  background: linear-gradient(45deg,  #b5bdc8 0%,#828c95 24%,#24323a 82%); /* W3C */
+  background: #5F6062; /* Old browsers */
+  background: -moz-linear-gradient(45deg,  #5F6062 0%, #2C3842 40%, #2D2012 82%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#5F6062), color-stop(40%,#2C3842), color-stop(82%,#2D2012)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg,  #5F6062 0%,#2C3842 40%,#2D2012 82%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg,  #5F6062 0%,#2C3842 40%,#2D2012 82%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg,  #5F6062 0%,#2C3842 40%,#2D2012 82%); /* IE10+ */
+  background: linear-gradient(45deg, #5F6062 0%,#2C3842 40%,#2D2012 82%); /* W3C */
 
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -158,27 +171,31 @@ input:focus {
 }
 .slide.caption h1, .slide.caption h2, .slide.caption h3 {
   border: none;
+  margin-bottom: 15%;
 }
 .slide h1, .slide h2, .slide h3, .slide p {
   /* http://css3generator.com/ */
   text-shadow: -2px 2px 2px #000000;
 }
-.slide.code {
-  font-size: 1em;
+.slide .code {
+  font-size: 2.5em;
   text-align: left;
 }
 .slide.full {
-  font-size: 2.5em;
+  font-size: 3em;
 }
 .slide.full h1 {
   align-self: flex-start;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #FCCC37;
   font-size: 1em;
   font-weight: 900;
   text-transform: uppercase;
   margin-left: 2em;
-  color: #000;
+  color: #FCCC37;
   text-shadow: none;
+  margin: 0 1em;
+  position: absolute;
+  top: 1em;
 }
 .slide.full h2 {
   font-size: 1.5em;
@@ -186,7 +203,11 @@ input:focus {
   margin-bottom: 0;
 }
 .slide.full ul {
-  margin-left: 1.5em;
+  margin: 0 4em 0 4em;
+  max-width: 90%;
+}
+.slide.full ul code {
+  font-size: .833em;
 }
 .slide.full ul, .slide.full p {
   text-align: left;
@@ -197,4 +218,24 @@ input:focus {
   line-height: 1.33em;
   margin: 0;
   padding: 0;
+}
+.slide.full p {
+  max-width: 95%;
+  font-size: 1.333em;
+  line-height: 1.333em;
+  margin: 1.5em;
+  padding: 0;
+}
+
+.slide.credits h2 {
+  font-size: 3em;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+.slide.credits p {
+  width: 80%;
+  font-size: 2em;
+  line-height: 1.333em;
+  margin: 1em 10%;
+  text-align: left;
 }

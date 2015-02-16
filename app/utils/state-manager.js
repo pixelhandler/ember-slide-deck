@@ -11,7 +11,7 @@ export default Ember.StateManager.extend({
         manager.transitionTo('playing', context);
       } else {
         var slug = '' + (+context.get('currentModel.slug') + 1);
-        window.document.location = '#/slides/' + slug;
+        context.transitionTo('slide', slug);
       }
     }
   }),
@@ -24,7 +24,7 @@ export default Ember.StateManager.extend({
 
     next: function (manager, context) {
       var slug = '' + (+context.get('currentModel.slug') + 1);
-      window.document.location = '#/slides/' + slug;
+      context.transitionTo('slide', slug);
       this.play(manager, context);
     },
 
@@ -41,7 +41,7 @@ export default Ember.StateManager.extend({
     startInterval: function (manager, context, milliseconds) {
       var slug = '' + (+context.get('currentModel.slug') + 1);
       this.timeoutId = Ember.run.later(function(){
-        window.document.location = '#/slides/' + slug;
+        context.transitionTo('slide', slug);
         manager.send('play', context);
       }, milliseconds);
     },

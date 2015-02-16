@@ -10,7 +10,7 @@
 {{/if}}
 {{#if model.markdown}}
   <section class="markdown">
-    {{showdown-addon model.markdown}}
+    {{markdown-to-html markdown=model.markdown}}
   </section>
 {{/if}}
 {{#if model.code}}

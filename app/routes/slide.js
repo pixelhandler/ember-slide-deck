@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+
   model: function(params) {
     var slide = this.store.filter('slide', function (model) {
       return model.get('slug') === params.slide_slug;
@@ -10,6 +11,11 @@ export default Ember.Route.extend({
 
   serialize: function (model) {
     return { slide_slug: model.get('slug') };
-  }
+  },
 
+  actions: {
+    error: function(e) {
+      console.error(e);
+    }
+  }
 });

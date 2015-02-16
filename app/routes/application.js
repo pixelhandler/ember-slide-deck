@@ -4,9 +4,20 @@ export default Ember.Route.extend({
   actions: {
 
     previous: function () {
+      var index;
       var slideRoute = this.container.lookup('route:slide');
-      var slug = '' + (+slideRoute.get('currentModel.slug') - 1);
-      window.document.location = '#/slides/' + slug;
+      var currentModel = slideRoute.get('currentModel');
+      var slides = this.modelFor('slides');
+      if (slides) {
+        index = slides.indexOf(currentModel);
+        this.transitionTo('slide', slides.objectAt(index - 1).get('slug'));
+      } else {
+        var slidesRoute = this.container.lookup('route:slides');
+        slidesRoute.model().then(function(deck) {
+          index = deck.indexOf(currentModel);
+          this.transitionTo('slide', deck.objectAt(index - 1).get('slug'));
+        }.bind(this));
+      }
     },
 
     next: function () {
@@ -15,18 +26,26 @@ export default Ember.Route.extend({
     },
 
     first: function () {
-      window.document.location = '#/slides/' + 0;
+      var slides = this.modelFor('slides');
+      if (slides) {
+        this.transitionTo('slide', slides.get('firstObject.slug'));
+      } else {
+        var slidesRoute = this.container.lookup('route:slides');
+        slidesRoute.model().then(function(deck) {
+          this.transitionTo('slide', deck.get('firstObject.slug'));
+        }.bind(this));
+      }
     },
 
     last: function () {
       var slides = this.modelFor('slides');
       if (slides) {
-        window.document.location = '#/slides/' + 0;
+        this.transitionTo('slide', slides.get('lastObject.slug'));
       } else {
         var slidesRoute = this.container.lookup('route:slides');
         slidesRoute.model().then(function(deck) {
-          window.document.location = '#/slides/' + deck.get('lastObject.slug');
-        });
+          this.transitionTo('slide', deck.get('lastObject.slug'));
+        }.bind(this));
       }
     }
   }
